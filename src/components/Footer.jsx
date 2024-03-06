@@ -8,11 +8,11 @@ import {
     Twitter,
   } from "@material-ui/icons";
   import styled from "styled-components";
-  
+  import { mobile } from "../responsive";
   
   const Container = styled.div`
     display: flex;
-    
+    ${mobile({ flexDirection: "column" })}
   `;
   
   const Left = styled.div`
@@ -42,11 +42,13 @@ import {
     align-items: center;
     justify-content: center;
     margin-right: 20px;
+    cursor: pointer;
   `;
   
   const Center = styled.div`
     flex: 1;
     padding: 20px;
+    ${mobile({ display: "none" })}
   `
   
   const Title = styled.h3`
@@ -69,7 +71,7 @@ import {
   const Right = styled.div`
     flex: 1;
     padding: 20px;
-    
+    ${mobile({ backgroundColor: "#fff8f8" })}
   
   `;
   
@@ -126,13 +128,13 @@ import {
         <Right>
           <Title>Contact</Title>
           <ContactItem>
-            <Room style={{marginRight:"10px"}}/> 622 Dixie Path , South Tobinchester 98336
+            <Room style={{marginRight:"10px"}}/>Ahmedabad
           </ContactItem>
           <ContactItem>
-            <Phone style={{marginRight:"10px"}}/> +1 234 56 78
+            <Phone style={{marginRight:"10px"}}/> 8956231478
           </ContactItem>
           <ContactItem>
-            <MailOutline style={{marginRight:"10px"}} /> contact@lama.dev
+            <MailOutline style={{marginRight:"10px"}} /> contact@e-mart.com
           </ContactItem>
           <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
         </Right>
