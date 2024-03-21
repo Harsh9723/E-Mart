@@ -45,7 +45,7 @@ const Circle = styled.div`
   background-color: white;
   position: absolute;
 `
-const Image = styled.div`
+const Image = styled.img`
  height: 75%;
   z-index: 2;
   `

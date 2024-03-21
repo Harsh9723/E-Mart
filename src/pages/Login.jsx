@@ -6,10 +6,10 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
+      rgba(232, 148, 148, 0.5),
+      rgba(89, 233, 170, 0.5)
     ),
-    url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+    url("https://as1.ftcdn.net/v2/jpg/02/32/78/62/1000_F_232786271_k6UtuULX9cuSH9mRUZ8sZ6yf8GTi7Uph.jpg")
       center;
   background-size: cover;
   display: flex;
@@ -18,9 +18,9 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: 25%;
+  width: 30%;
   padding: 20px;
-  background-color: white;
+  background-color: #cfe9f6;
 
 `;
 
@@ -67,7 +67,7 @@ const Login = () => {
         <Input placeholder="username" />
         <Input placeholder="password" />
         <Button>LOGIN</Button>
-        <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
+        <Link >DO NOT YOU REMEMBER THE PASSWORD?</Link>
         <Link>CREATE A NEW ACCOUNT</Link>
       </Form>
     </Wrapper>

@@ -6,10 +6,10 @@ const Container = styled.div`
     width: 100vw;
     height: 100vh;
     background: linear-gradient(
-        rgba(255, 255, 255, 0.5)
-        rgba(255, 255, 255, 0.5)
+        rgba(236, 106, 106, 0.5),
+        rgba(46, 37, 37, 0.5)
     ),
-    url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")    center;
+    url("https://png.pngtree.com/background/20210712/original/pngtree-paper-cut-wind-gray-white-e-commerce-banner-background-design-picture-image_1187684.jpg")    center;
     background-size: cover;
     display: flex;
     align-items: center;
@@ -19,7 +19,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
 width: 40%;
 padding: 20px;
-background-color: white;
+background-color: #ffe1e1;
 `
 
 const Title = styled.h1`
@@ -36,10 +36,14 @@ const Input = styled.input`
 flex: 1;
 min-width: 40%;
 margin: 20px 10px 0px 0px;
+background: linear-gradient(
+        rgba(255, 241, 241, 0.5),
+        rgba(93, 77, 77, 0.5)
+)
 `
 
 const Agreement = styled.span`
-font-size: 12px;
+font-size: 20px;
 margin: 20px 0px;
 `
 const Button = styled.button`
