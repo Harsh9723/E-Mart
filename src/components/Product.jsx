@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { ShoppingCartOutlined } from "@material-ui/icons"
 import {FavoriteBorderOutlined} from "@material-ui/icons"
 import { SearchOutlined } from '@material-ui/icons'
-
+import { Link } from 'react-router-dom'
 
 
 
@@ -70,6 +70,7 @@ const Icon = styled.div`
 
 
 const Product = ({ item }) => {
+ 
   return (
     <Container>
       <Circle />
@@ -79,10 +80,12 @@ const Product = ({ item }) => {
           <ShoppingCartOutlined />
         </Icon>
         <Icon>
-          <SearchOutlined />
+          <Link to={`/product/${item._id}`}>
+              <SearchOutlined />
+          </Link>
         </Icon>
         <Icon>
-        <FavoriteBorderOutlined/>
+            <FavoriteBorderOutlined/>
         </Icon>
         
       </Info>
