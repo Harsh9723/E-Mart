@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -14,6 +15,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${mobile({
+    padding: "20px",
+    flexDirection: "column"
+  })}
 `;
 
 const Wrapper = styled.div`
@@ -22,37 +28,41 @@ const Wrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+  ${mobile({
+    width: "80%"
+  })}
 `;
 
 const Title = styled.h1`
-font-size: 24px;
-font-weight: 300;
-margin-bottom: 2px;
-color: #333;
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 2px;
+  color: #333;
 `;
 
 const Form = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Input = styled.input`
-flex: 1;
-min-width: 40%;
-margin: 10px 0;
-padding: 10px;
-border-radius: 5px;
-border: 1px solid #ddd;
+  flex: 1;
+  min-width: 40%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
 `;
 
 const A = styled.a`
-color: blue;
-cursor: pointer;
+  color: blue;
+  cursor: pointer;
 
-&:hover {
-    color: red
-}
-`
+  &:hover {
+    color: red;
+  }
+`;
 
 const Agreement = styled.span`
   font-size: 20px;
@@ -60,19 +70,23 @@ const Agreement = styled.span`
 `;
 
 const Button = styled.button`
-width: 35%;
-border: none;
-padding: 10px 15px;
-background-color: #2ecc71;
-color: white;
-cursor: pointer;
-margin-bottom: 10px;
-border-radius: 5px;
-transition: background-color 0.3s ease;
+  width: 35%;
+  border: none;
+  padding: 10px 15px;
+  background-color: #2ecc71;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 
-&:hover {
-  background-color: #27ae60;
-}
+  &:hover {
+    background-color: #27ae60;
+  }
+
+  ${mobile({
+    width: "100%"
+  })}
 `;
 
 const Register = () => {
@@ -89,7 +103,8 @@ const Register = () => {
           <Input type="password" placeholder="Confirm Password" />
           <Agreement>
             By creating an account, I consent to the processing of my personal
-            data in accordance with the <br /><A>Privacy Policy</A>
+            data in accordance with the <br />
+            <A>Privacy Policy</A>
           </Agreement>
           <Button>CREATE</Button>
         </Form>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { mobile } from '../responsive';
 
 const Container = styled.div`
   width: 100vw;
@@ -13,6 +14,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${mobile({ // Apply mobile styles
+    padding: "20px",
+    flexDirection: "column"
+  })}
 `;
 
 const Wrapper = styled.div`
@@ -21,6 +27,10 @@ const Wrapper = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+  ${mobile({ // Apply mobile styles
+    width: "80%"
+  })}
 `;
 
 const Title = styled.h1`
@@ -57,6 +67,10 @@ const Button = styled.button`
   &:hover {
     background-color: #27ae60;
   }
+  
+  ${mobile({ // Apply mobile styles
+    width: "100%"
+  })}
 `;
 
 const Link = styled.a`
