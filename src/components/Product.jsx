@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { ShoppingCartOutlined } from "@material-ui/icons"
 import {FavoriteBorderOutlined} from "@material-ui/icons"
