@@ -22,12 +22,15 @@ const Arrow = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
   cursor: pointer;
   opacity: 0.5;
   z-index: 2;
+  
+  top: 50%;
+  transform: translateY(-50%);
+  ${(props) => props.direction === "left" && "left: 10px;"}
+  ${(props) => props.direction === "right" && "right: 10px;"}
+
   ${mobile({ display: "none" })}
 `;
 
@@ -54,7 +57,7 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-  height: 80%;
+  height: 90%;
   ${mobile({ height: "100%", width: "100%", objectFit: "cover" })}
 `;
 
