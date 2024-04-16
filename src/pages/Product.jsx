@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import Navbar from "../components/Navbar"
-import Announcement from "../components/Announcement"
-import Newsletter from "../components/Newsletter"
-import Footer from "../components/Footer"
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react';
+import Navbar from "../components/Navbar";
+import Announcement from "../components/Announcement";
+import Newsletter from "../components/Newsletter";
+import Footer from "../components/Footer";
+import styled from 'styled-components';
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
-import { useLocation } from 'react-router'
-import { useDispatch } from 'react-redux'
-import { publicRequest } from '../requestMethods'
-import {addProduct} from "../redux/cartRedux"
-
-
+import { useLocation } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { publicRequest } from '../requestMethods';
+import { addProduct } from "../redux/cartRedux";
 
 const Container = styled.div``;
 
@@ -123,37 +121,40 @@ const Button = styled.button`
 `;
 
 const Product = () => {
-  const location = useLocation()
+  const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-useEffect(() => {
-  const getProduct = async() => {
-    try{
-      const res = await publicRequest.get("/products/find" + id);
-      setProduct(res.data)
-    } catch{}
-  }
-  getProduct();
-},[id])
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top on component mount
+    const getProduct = async() => {
+      try {
+        const res = await publicRequest.get("/products/find" + id);
+        setProduct(res.data);
+      } catch(error) {
+        console.log(error);
+      }
+    };
+    getProduct();
+  }, [id]);
 
-const handleQuantity = (type) => {
-  if(type === "dec"){
-    quantity > 1 && setQuantity(quantity -1)
-  }else{
-    setQuantity(quantity + 1)
-  }
-}
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
 
-const handleClick = () => {
-  dispatch(
-    addProduct({...product, quantity, color, size})
-  )
-;};
+  const handleClick = () => {
+    dispatch(
+      addProduct({...product, quantity, color, size})
+    );
+  };
 
   return (
     <Container>
@@ -187,7 +188,7 @@ const handleClick = () => {
               <FilterSize onChange={(e) => setSize(e.target.value)}>
                 {product.size?.map((s) => (
                   <FilterSizeOption key={s}>{s}</FilterSizeOption>
-                ))}                
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
@@ -195,7 +196,7 @@ const handleClick = () => {
             <AmountContainer>
               <Remove onClick={() => handleQuantity("dec")} />
               <Amount>{quantity}</Amount>
-              <Add onClick={() => handleQuantity("inc")}/>
+              <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
             <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
@@ -204,7 +205,7 @@ const handleClick = () => {
       <Newsletter />
       <Footer />
     </Container>
-  )
-}
+  );
+};
 
 export default Product;
