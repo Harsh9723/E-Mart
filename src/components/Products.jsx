@@ -34,7 +34,7 @@ const Container = styled.div`
         cat && 
         setFilteredProducts(
             products.filter((item) =>
-             Object.entries(filters).every(([key,value]) =>
+            Object.entries(filters).every(([key,value]) =>
             item[key].includes(value)
                 )
             )
@@ -70,4 +70,4 @@ const Container = styled.div`
     </Container>
 )}
 
-export default Products;
+export default Products ;

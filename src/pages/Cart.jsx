@@ -171,19 +171,26 @@ const Cart = () => {
 
   useEffect(() => {
     const makeRequest = async () => {
-      try {
-        const res = await useRequest.post("/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: 500,
-        });
-        navigate.push("/success", {
-          stripeData: res.data,
-          products: cart,
-        })
-      } catch { }
+        try {
+            const res = await useRequest.post("/stripe/checkout", {
+                tokenId: stripeToken.id,
+                amount: cart.total * 100,
+            });
+            navigate.push("/success", {
+                stripeData: res.data,
+                products: cart,
+            });
+        } catch (error) {
+            // Handle error
+            console.error("Error making request:", error);
+        }
+    };
+
+    if (stripeToken) {
+        makeRequest();
     }
-    stripeToken && makeRequest();
-  }, [stripeToken, cart.total, navigate])
+}, [stripeToken, cart.total, navigate, cart]);
+
   return (
     <Container>
       <Navbar />
