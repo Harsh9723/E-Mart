@@ -1,5 +1,5 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  ${mobile({ display: "none" })}
+  ${mobile({ height: "70vh", overflow: "hidden" })}
 `;
 
 const Arrow = styled.div`
@@ -22,14 +22,16 @@ const Arrow = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: ${(props) => props.direction === "left" && "10px"};
-  right: ${(props) => props.direction === "right" && "10px"};
-  margin: auto;
   cursor: pointer;
   opacity: 0.5;
   z-index: 2;
+  
+  top: 50%;
+  transform: translateY(-50%);
+  ${(props) => props.direction === "left" && "left: 10px;"}
+  ${(props) => props.direction === "right" && "right: 10px;"}
+
+  ${mobile({ display: "none" })}
 `;
 
 const Wrapper = styled.div`
@@ -40,53 +42,68 @@ const Wrapper = styled.div`
 `;
 
 const Slide = styled.div`
-  width: 100vw;
+  min-width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   background-color: #${(props) => props.bg};
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const ImgContainer = styled.div`
   height: 100%;
   flex: 1;
+  ${mobile({ height: "90%", width: "90%" })}
 `;
 
 const Image = styled.img`
-  height: 80%;
+  height: 90%;
+  ${mobile({ height: "100%", width: "100%", objectFit: "cover" })}
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
   padding: 50px;
+  ${mobile({ padding: "20px" })}
 `;
 
 const Title = styled.h1`
-  font-size: 70px;
+  font-size: 30px;
+  ${mobile({ fontSize: "20px" })}
 `;
 
 const Desc = styled.p`
-  margin: 50px 0px;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 3px;
+  margin: 20px 0px;
+  font-size: 16px;
+  ${mobile({ fontSize: "14px" })}
 `;
 
 const Button = styled.button`
   padding: 10px;
-  font-size: 20px;
+  font-size: 16px;
   background-color: transparent;
   cursor: pointer;
+  ${mobile({ fontSize: "14px" })}
 `;
+
 const Slider = () => {
   const [slideIndex, setSlideIndex] = useState(0);
+
   const handleClick = (direction) => {
     if (direction === "left") {
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+      setSlideIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : sliderItems.length - 1));
     } else {
-      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+      setSlideIndex((prevIndex) => (prevIndex < sliderItems.length - 1 ? prevIndex + 1 : 0));
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleClick("right");
+    }, 5000); // Change slide every 5 seconds (5000 milliseconds)
+
+    return () => clearInterval(interval);
+  }, []); // Run effect only once on mount
 
   return (
     <Container>
@@ -102,7 +119,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
+              <Button>SHOP NOW</Button>
             </InfoContainer>
           </Slide>
         ))}

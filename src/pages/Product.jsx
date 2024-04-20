@@ -130,7 +130,7 @@ const Product = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getProduct = async() => {
+    const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
@@ -138,6 +138,7 @@ const Product = () => {
         console.error("Error fetching product:", error);
       }
     };
+
     getProduct();
   }, [id]);
 

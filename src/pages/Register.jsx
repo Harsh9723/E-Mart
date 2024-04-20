@@ -1,73 +1,92 @@
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(rgba(240, 239, 239, 0.5), rgba(46, 37, 37, 0.5)),
-    url("https://png.pngtree.com/background/20210712/original/pngtree-paper-cut-wind-gray-white-e-commerce-banner-background-design-picture-image_1187684.jpg")
+  background: linear-gradient(
+      rgba(136, 207, 224, 0.1),
+      rgba(102, 185, 191, 0.6)
+    ),
+    url("https://t4.ftcdn.net/jpg/02/86/36/11/360_F_286361199_fzZsOpZ3memFzCn889a9TZHMuTTsFrVl.jpg")
       center;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${mobile({
+    padding: "20px",
+    flexDirection: "column"
+  })}
 `;
 
 const Wrapper = styled.div`
-  width: 40%;
+  width: 30%;
   padding: 20px;
-  background-color: #e7bfbf52;
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
-  ${mobile({ width: "75%" })}
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+  ${mobile({
+    width: "80%"
+  })}
 `;
 
 const Title = styled.h1`
   font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  text-align: center;
+  font-weight: 300;
+  margin-bottom: 2px;
+  color: #333;
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 const Input = styled.input`
-  width: 100%;
+  flex: 1;
+  min-width: 40%;
+  margin: 10px 0;
   padding: 10px;
-  margin-bottom: 15px;
-  border: none;
   border-radius: 5px;
-  background-color: rgba(252, 252, 252, 0.5);
-  outline: none;
-  ::placeholder {
-    color: rgba(93, 77, 77, 0.7);
+  border: 1px solid #ddd;
+`;
+
+const A = styled.a`
+  color: blue;
+  cursor: pointer;
+
+  &:hover {
+    color: red;
   }
 `;
 
 const Agreement = styled.span`
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: rgba(0, 0, 0, 0.7);
-  text-align: center;
+  font-size: 20px;
+  margin: 20px 0px;
 `;
 
 const Button = styled.button`
-  width: 50%;
-  align-self: center;
-  padding: 15px 0;
+  width: 35%;
   border: none;
-  border-radius: 5px;
-  background-color: teal;
+  padding: 10px 15px;
+  background-color: #2ecc71;
   color: white;
-  font-size: 18px;
-  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
   &:hover {
-    background-color: #008080;
+    background-color: #27ae60;
   }
+
+  ${mobile({
+    width: "100%"
+  })}
 `;
 
 const Register = () => {
@@ -84,7 +103,8 @@ const Register = () => {
           <Input type="password" placeholder="Confirm Password" />
           <Agreement>
             By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
+            data in accordance with the <br />
+            <A>Privacy Policy</A>
           </Agreement>
           <Button>CREATE</Button>
         </Form>

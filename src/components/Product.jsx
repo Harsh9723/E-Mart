@@ -20,6 +20,8 @@ const Info = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
+  border: 2px solid black;
+  border-radius: 20px;
   cursor: pointer;
 `
 
@@ -30,23 +32,19 @@ const Container = styled.div`
   height: 350px;
   display: flex;
   align-items: center;
+  background-color: #F6F5F2;
   justify-content: center;
-  background-color: #f5fbfd;
+  border: 2px solid #F0EBE3;
+  border-radius: 20px;
   position: relative;
+
 
   &:hover ${Info}{
     opacity: 1;
   };
 `
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-`
 const Image = styled.img`
- height: 75%;
+ height: 80%;
   z-index: 2;
   `
 
@@ -73,7 +71,7 @@ const Product = ({ item }) => {
  
   return (
     <Container>
-      <Circle />
+      {/* <Circle /> */}
       <Image src={item.img} />
       <Info>
         <Icon>
