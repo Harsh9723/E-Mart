@@ -1,24 +1,53 @@
-import logo from './logo.svg';
+import React from 'react';
+import Sidebar from './components/sidebar/Sidebar';
+import Topbar from './components/topbar/Topbar';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import UserList from './pages/userList/UserList';
+import User from './pages/user/User';
+import NewUser from './pages/newUser/NewUser';
+import ProductList from './pages/productList/ProductList';
+import Product from './pages/product/Product';
+import NewProduct from './pages/newProduct/NewProduct';
 import './App.css';
+import Home from './pages/home/Home';
+import Login from './pages/login/Login';
 
 function App() {
+  // Parse localStorage data
+  const localStorageData = JSON.parse(localStorage.getItem("persist:root"));
+  
+  // Extract isAdmin status from localStorageData, handling null case
+  const isAdmin = localStorageData ? JSON.parse(localStorageData.user)?.currentUser.isAdmin : false;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {isAdmin ? (
+        <>
+          <Topbar />
+          <div className='container'>
+            <Sidebar />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/users' element={<UserList />} />
+              <Route path='/user/:userId' element={<User />} />
+              <Route path='/newUser' element={<NewUser />} />
+              <Route path='/products' element={<ProductList />} />
+              <Route path='/product/:productId' element={<Product />} />
+              <Route path='/newproduct' element={<NewProduct />} />
+              <Route path='/login' element={<Login />} />
+              {/* Redirect to home if route not found */}
+              <Route path='*' element={<Navigate to='/' />} />
+            </Routes>
+          </div>
+        </>
+      ) : (
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          {/* Redirect to login if user is not admin */}
+          <Route path='*' element={<Navigate to='/login' />} />
+        </Routes>
+      )}
+    </Router>
   );
 }
 
