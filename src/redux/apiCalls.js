@@ -2,7 +2,7 @@ import { publicRequest, userRequest } from "../requestmethods";
 import { getproductFailure, getproductSuccess, getproductStart, deleteproductStart, deleteproductSuccess, deleteproductFailure, updateproductStart, updateproductSuccess, updateproductFailure, addproductFailure, addproductSuccess, addproductStart } from "./productredux";
 import { loginFalilure, loginStart, loginSuccess } from "./userRedux";
 
-export const login = async (dispatch, users) => {
+export const    login = async (dispatch, users) => {
     dispatch(loginStart());
     try {
         const res = await publicRequest.post("/auth/login", users);

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
@@ -14,19 +15,21 @@ import Login from './pages/login/Login';
 
 function App() {
   // Parse localStorage data
-  const localStorageData = JSON.parse(localStorage.getItem("persist:root"));
+  // const localStorageData = JSON.parse(localStorage.getItem("persist:root"));
   
   // Extract isAdmin status from localStorageData, handling null case
-  const isAdmin = localStorageData ? JSON.parse(localStorageData.user)?.currentUser.isAdmin : false;
+  // const isAdmin = localStorageData && localStorageData.user && JSON.parse(localStorageData.user)?.currentUser.isAdmin;
+
 
   return (
     <Router>
-      {isAdmin ? (
+       
+       <Routes>
         <>
+        <Route path='/login' element={<Login />} />
           <Topbar />
           <div className='container'>
             <Sidebar />
-            <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/users' element={<UserList />} />
               <Route path='/user/:userId' element={<User />} />
@@ -34,21 +37,22 @@ function App() {
               <Route path='/products' element={<ProductList />} />
               <Route path='/product/:productId' element={<Product />} />
               <Route path='/newproduct' element={<NewProduct />} />
-              <Route path='/login' element={<Login />} />
               {/* Redirect to home if route not found */}
               <Route path='*' element={<Navigate to='/' />} />
-            </Routes>
           </div>
-        </>
-      ) : (
+          </>
+
+            </Routes>
+     
         <Routes>
           <Route path='/login' element={<Login />} />
           {/* Redirect to login if user is not admin */}
           <Route path='*' element={<Navigate to='/login' />} />
         </Routes>
-      )}
+    
     </Router>
   );
 }
 
 export default App;
+

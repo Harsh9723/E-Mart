@@ -10,7 +10,6 @@ const handleClick = (e) => {
     e.preventDefault()
     login(dispatch , {username, password})
 }
-
     const dispatch  = useDispatch()
 
 
@@ -36,7 +35,7 @@ const handleClick = (e) => {
             padding:10,marginBottom:20
          }}
          />
-         <button onClick={handleClick} style={{
+         <button onClick={handleClick }  style={{
             padding:10,
             width:100,
          }}>Login</button>
