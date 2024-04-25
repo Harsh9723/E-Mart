@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-import React from 'react'
-import  styled  from 'styled-components'
-import {mobile} from '../responsive'
-import { Link } from 'react-router-dom';
-=======
 import React from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
->>>>>>> a7605caa167e3c405179c2b9dc8c77bce61b05a7
 
 const Container = styled.div`
   width: 100%;
@@ -70,19 +63,6 @@ const Button = styled.button`
 
 const CategoryItem = ({ item }) => {
   return (
-<<<<<<< HEAD
-   <Container>
-    <Link to={`/products/${item.cat}`}>
-    <Image src={item.img}/> 
-      <Info> 
-        <Title>{item.title}</Title>
-        <Button> Shop Now </Button>
-    </Info>
-    </Link>
-   </Container>
-  )
-}
-=======
     <Container>
       <Image src={item.img} />
       <Info>
@@ -92,6 +72,5 @@ const CategoryItem = ({ item }) => {
     </Container>
   );
 };
->>>>>>> a7605caa167e3c405179c2b9dc8c77bce61b05a7
 
 export default CategoryItem;
