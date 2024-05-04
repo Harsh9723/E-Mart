@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { mobile } from '../responsive';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../redux/userRedux'; // Assuming you have a login action creator in userRedux.js
+import { loginStart } from '../redux/userRedux'; // Assuming you have a login action creator in userRedux.js
 
 const Container = styled.div`
   width: 100vw;
@@ -101,7 +101,7 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(login(username, password)); // Dispatch the login action with username and password
+    dispatch(loginStart(username, password)); // Dispatch the login action with username and password
   };
 
   return (
