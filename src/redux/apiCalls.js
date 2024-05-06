@@ -22,7 +22,7 @@ export const getproducts = async (dispatch) => {
     }
 }
 
-export const deleteproducts = async (id, dispatch) => {
+export const   deleteproducts = async (id, dispatch) => {
     dispatch(deleteproductStart());
     try {
         const res = await userRequest.delete(`/products/${id}`);

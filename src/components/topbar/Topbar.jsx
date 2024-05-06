@@ -15,11 +15,11 @@ export default function Topbar() {
         <div className="topRight">
           <div className="topbarIconContainer">
             <NotificationsNoneIcon />
-            <span className="topIconBadge">2</span>
+            <span className="topIconBadge"></span>
           </div>
           <div className="topbarIconContainer">
             <LanguageIcon />
-            <span className="topIconBadge">2</span>
+            {/* <span className="topIconBadge"></span> */}
           </div>
           <div className="topbarIconContainer">
             <SettingsIcon />

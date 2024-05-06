@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "http://localhost:5000/api/";
 
 // Retrieve user data from localStorage
 let TOKEN = null;
@@ -14,13 +14,13 @@ if (persistedRoot) {
 
 // Create axios instances
 export const publicRequest = axios.create({
-    baseURL: BASE_URL,
+    baseURL: BASE_URL, 
 });
 
 // Create userRequest only if TOKEN exists
-export const userRequest = TOKEN
-    ? axios.create({
+export const userRequest = 
+     axios.create({
           baseURL: BASE_URL,
           headers: { token: `Bearer ${TOKEN}` },
       })
-    : null;
+  

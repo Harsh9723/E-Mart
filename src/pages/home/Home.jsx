@@ -33,23 +33,23 @@
             []
         );
 
-        useEffect(() => {
-            const getStats = async () => {
-                try {
-                    console.log("userRequest:", userRequest); // Log userRequest to check its value
-                    const res = await userRequest.get(`/orders/income?pid=${productId}`);
-                    console.log("Response:", res); // Log response to check its content
-                    const list = res.data.sort((a, b) => a._id - b._id);
-                    setPStats(list.map(item => ({
-                        name: MONTHS[item._id - 1],
-                        Sales: item.total
-                    })));
-                } catch (err) {
-                    console.log(err);
-                }
-            };
-            getStats();
-        }, [productId, MONTHS]);
+        // useEffect(() => {
+        //     const getStats = async () => {
+        //         try {
+        //             console.log("userRequest:", userRequest); // Log userRequest to check its value
+        //             // const res = await userRequest.get(`/orders/income?pid=${productId}`);
+        //             console.log("Response:", res); // Log response to check its content
+        //             const list = res.data.sort((a, b) => a._id - b._id);
+        //             setPStats(list.map(item => ({
+        //                 name: MONTHS[item._id - 1],
+        //                 Sales: item.total
+        //             })));
+        //         } catch (err) {
+        //             console.log(err);
+        //         }
+        //     };
+        //     getStats();
+        // }, [productId, MONTHS]);
         
 
         return (

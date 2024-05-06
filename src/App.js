@@ -11,7 +11,7 @@ import Product from './pages/product/Product';
 import NewProduct from './pages/newProduct/NewProduct';
 import './App.css';
 import Home from './pages/home/Home';
-import Login from './pages/login/Login';
+// import Login from './pages/login/Login';
 
 function App() {
   // Parse localStorage data
@@ -24,12 +24,13 @@ function App() {
   return (
     <Router>
        
-       <Routes>
         <>
-        <Route path='/login' element={<Login />} />
           <Topbar />
           <div className='container'>
             <Sidebar />
+            <Routes>
+              {/* <Route path='/login' element={<Login />} /> */}
+
               <Route path='/' element={<Home />} />
               <Route path='/users' element={<UserList />} />
               <Route path='/user/:userId' element={<User />} />
@@ -39,15 +40,14 @@ function App() {
               <Route path='/newproduct' element={<NewProduct />} />
               {/* Redirect to home if route not found */}
               <Route path='*' element={<Navigate to='/' />} />
-          </div>
-          </>
-
             </Routes>
+          </div>
+        </>
      
         <Routes>
-          <Route path='/login' element={<Login />} />
+          {/* <Route path='/login' element={<Login />} /> */}
           {/* Redirect to login if user is not admin */}
-          <Route path='*' element={<Navigate to='/login' />} />
+          {/* <Route path='*' element={<Navigate to='/login' />} /> */}
         </Routes>
     
     </Router>
