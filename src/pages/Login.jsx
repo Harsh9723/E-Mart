@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginStart } from '../redux/userRedux'; // Assuming you have a login action creator in userRedux.js
 
 const Container = styled.div`
   width: 100vw;
@@ -85,15 +88,40 @@ const Link = styled.a`
   }
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
 const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(loginStart(username, password)); // Dispatch the login action with username and password
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
         <Form>
-          <Input type="text" placeholder="Username" />
-          <Input type="password" placeholder="Password" />
-          <Button>LOGIN</Button>
+          <Input 
+            type="text" 
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)} // Update username state on change
+          />
+          <Input 
+            type="password" 
+            placeholder="Password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} // Update password state on change
+          />
+          <Button onClick={handleClick}>LOGIN</Button> {/* Call handleClick on button click */}
           <Link>Forgot Password?</Link>
           <Link>CREATE NEW ACCOUNT</Link>
         </Form>

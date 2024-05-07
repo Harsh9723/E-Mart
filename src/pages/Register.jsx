@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import {useNavigate} from 'react-router-dom'
 
 const Container = styled.div`
   width: 100vw;
@@ -90,6 +91,7 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Wrapper>
@@ -106,7 +108,7 @@ const Register = () => {
             data in accordance with the <br />
             <A>Privacy Policy</A>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={() => navigate('/')}>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Add, Remove } from "@material-ui/icons";
+import { useLocation } from 'react-router';
+import styled from 'styled-components';
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
-import styled from 'styled-components';
-import { Add, Remove } from "@material-ui/icons";
-import { mobile } from "../responsive";
-import { useLocation } from 'react-router';
-import { useDispatch } from 'react-redux';
 import { publicRequest } from '../requestMethods';
 import { addProduct } from "../redux/cartRedux";
+import { mobile } from "../responsive";
 
 const Container = styled.div``;
 
@@ -130,15 +130,15 @@ const Product = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top on component mount
-    const getProduct = async() => {
+    const getProduct = async () => {
       try {
-        const res = await publicRequest.get("/products/find" + id);
+        const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
-      } catch(error) {
-        console.log(error);
+      } catch (error) {
+        console.error("Error fetching product:", error);
       }
     };
+
     getProduct();
   }, [id]);
 
@@ -151,9 +151,7 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    dispatch(
-      addProduct({...product, quantity, color, size})
-    );
+    dispatch(addProduct({...product, quantity, color, size}));
   };
 
   return (
@@ -162,29 +160,25 @@ const Product = () => {
       <Announcement />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+          <Image src={product.img} alt={product.title} />
         </ImgContainer>
         <InfoContainer>
-          <Title>{product.desc}</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at
-            iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget
-            tristique tortor pretium ut. Curabitur elit justo, consequat id
-            condimentum ac, volutpat ornare.
-          </Desc>
-          <Price>$ 20</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>$ {product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
               {product.color?.map((c) => (
-                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+                <FilterColor
+                  color={c}
+                  key={c}
+                  onClick={() => setColor(c)}
+                />
               ))}
-             
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              
               <FilterSize onChange={(e) => setSize(e.target.value)}>
                 {product.size?.map((s) => (
                   <FilterSizeOption key={s}>{s}</FilterSizeOption>

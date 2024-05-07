@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import { Badge } from "@material-ui/core"
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import {mobile} from "../responsive"
+import {useSelector} from 'react-redux'
+import {Link, useNavigate} from 'react-router-dom'
+
 const Container = styled.div`
     height:60px;
     ${mobile({ height: "45px" })}
@@ -67,6 +70,8 @@ ${mobile({ fontSize: "12px", marginLeft: "17px" })}
 
 
 function Navbar() {
+  const navigate = useNavigate()
+  const quantity = useSelector(state=>state.cart.quantity)
     return (
         <Container>
         <Wrapper>
@@ -81,13 +86,15 @@ function Navbar() {
             <Logo>Signature Style</Logo>
           </Center>
           <Right>
-            <MenuItem>REGISTER</MenuItem>
-            <MenuItem>SIGN IN</MenuItem>
+            <MenuItem onClick={() => navigate('/register')}>REGISTER</MenuItem>
+            <MenuItem onClick={() => navigate('/login')}>SIGN IN</MenuItem>
+            <Link to="/cart">
             <MenuItem>
-              <Badge badgeContent={4} color="primary">
+              <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlined />
               </Badge>
             </MenuItem>
+            </Link>
           </Right>
         </Wrapper>
       </Container>

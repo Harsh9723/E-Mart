@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import  Product  from './Product'
 import { popularProducts } from '../data'
-import ProductList from '../pages/ProductList'
 import axios from 'axios'
 
 const Container = styled.div`
@@ -14,10 +13,9 @@ const Container = styled.div`
 `
 
  const Products = (cat, filters,sort) => {
-    // console.log(cat,filters,sort)
 
-    const[filteredproducts, setFilteredProducts] = useState([popularProducts])
     const[products, setProducts] = useState([])
+    const[filteredproducts, setFilteredProducts] = useState([])
     useEffect(() => {
         const getProducts = async () => {
             try {
@@ -33,8 +31,13 @@ const Container = styled.div`
     }, [cat])
 
     useEffect(() => {
-        cat && setFilteredProducts(
-            products.filter(item => Object.entries(filters).every(([key,value]) => item[key].includes(value)))
+        cat && 
+        setFilteredProducts(
+            products.filter((item) =>
+            Object.entries(filters).every(([key,value]) =>
+            item[key].includes(value)
+                )
+            )
         )
     }, [products,cat,filters])
 
@@ -67,4 +70,4 @@ const Container = styled.div`
     </Container>
 )}
 
-export default Products;
+export default Products ;
