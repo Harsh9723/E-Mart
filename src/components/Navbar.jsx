@@ -45,6 +45,9 @@ text-align: center;`
 const Logo = styled.h1`
   font-weight: bold;
   ${mobile({ fontSize: "24px" })}
+  font-family: "Slackside One", cursive;
+  font-weight: 400;
+  font-style: normal;
   `
 
 const Right = styled.div`
@@ -75,7 +78,7 @@ function Navbar() {
             </SearchContainer>
           </Left>
           <Center>
-            <Logo>E-Mart</Logo>
+            <Logo>Signature Style</Logo>
           </Center>
           <Right>
             <MenuItem>REGISTER</MenuItem>
