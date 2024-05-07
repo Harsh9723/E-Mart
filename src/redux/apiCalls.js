@@ -47,7 +47,7 @@ export const updateProduct = async (id, product, dispatch) => {
 export const addProduct = async (product, dispatch) => {
     dispatch(addproductStart());
     try {
-        const res = await userRequest.post(`/products`, product); // Removed unnecessary object wrapping
+        const res = await userRequest.post(`/products`, product); 
         dispatch(addproductSuccess(res.data));
     } catch (err) {
         dispatch(addproductFailure());
