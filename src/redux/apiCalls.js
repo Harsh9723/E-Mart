@@ -1,6 +1,6 @@
 import { publicRequest, userRequest } from "../requestmethods";
 import { getproductFailure, getproductSuccess, getproductStart, deleteproductStart, deleteproductSuccess, deleteproductFailure, updateproductStart, updateproductSuccess, updateproductFailure, addproductFailure, addproductSuccess, addproductStart } from "./productredux";
-import { loginFalilure, loginStart, loginSuccess } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess, getusersStart, getusersFailure, getusersSuccess } from "./userRedux";
 
 export const    login = async (dispatch, users) => {
     dispatch(loginStart());
@@ -8,7 +8,7 @@ export const    login = async (dispatch, users) => {
         const res = await publicRequest.post("/auth/login", users);
         dispatch(loginSuccess(res.data));
     } catch (err) {
-        dispatch(loginFalilure());
+        dispatch(loginFailure());
     }
 }
 
@@ -53,3 +53,15 @@ export const addProduct = async (product, dispatch) => {
         dispatch(addproductFailure());
     }
 }
+
+
+// get users
+export const getallusers = () => async (dispatch) => {
+    dispatch(getusersStart());
+    try {
+        const res = await publicRequest.get("/users");
+        dispatch(getusersSuccess(res.data));
+    } catch(err) {
+        dispatch(getusersFailure());
+    }
+};

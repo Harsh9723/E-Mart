@@ -14,6 +14,7 @@ export default function NewProduct() {
   const [inputs, setInputs] = useState({})
   const [file, setFile] = useState(null)
   const [cat, setCat] = useState([])
+  const [selectedSize, setSelectedSize] = useState("");
   const dispatch = useDispatch()
 
   const handleChange = (e) => {
@@ -22,6 +23,11 @@ export default function NewProduct() {
 
   const handleCat = (e) => {
     setCat(e.target.value.split(","))
+  }
+
+  const handleSizeChange = (e) => {
+    setSelectedSize(e.target.value);
+    setInputs(prev => ({ ...prev, size: e.target.value }));
   }
 
   const handleClick = (e) => {
@@ -77,6 +83,17 @@ export default function NewProduct() {
         <div className="addProductItem">
           <label>Price</label>
           <input type="number" name="price" placeholder="100" onChange={handleChange} />
+        </div>
+        <div className="addProductItem">
+          <label>Size</label>
+          <select value={selectedSize} onChange={handleSizeChange}>
+            <option value="">Select Size</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
         </div>
         <div className="addProductItem">
           <label>Category</label>

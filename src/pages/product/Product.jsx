@@ -9,48 +9,76 @@ import { userRequest } from "../../requestmethods";
 
 export default function Product() {
     const location = useLocation();
-    const productId = location.pathname.split("/")[2];
-    const product = useSelector((state) =>
-        state.products.find(product => product._id === productId)
-    );
-    const[pStats, setPStats] = useState([])
+    const productId = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+    const products = useSelector((state) => state.products);
+    const product = products ? products.find(product => product._id === productId) : null;
+    const [pStats, setPStats] = useState([]);
     const MONTHS = useMemo(
         () => [
             "Jan",
             "Feb",
-            "mar",
-            "apr",
-            "may",
-            "jun",
-            "jul",
-            "aug",
-            "sep",
-            "oct",
-            "nov",
-            "dec"
-
-
-        ]
-    )
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ],
+        []
+    );
 
     useEffect(() => {
         const getStats = async () => {
-            try{
-                const res = await userRequest.get('/orders/income?pid' + productId);
-                const list = res.data.sort((a,b) => {
-                    return a._id - b._id
-                })
-                list.map((item) => 
-            setPStats((prev) => [
-                ...prev,
-                {name: MONTHS[item._id -1], Sales: item.total},
-            ])) 
-            } catch(err) {
-                console.log(err) 
+            try {
+                const res = await userRequest.get('/orders/income?pid=' + productId);
+                const list = res.data.sort((a, b) => {
+                    return a._id - b._id;
+                });
+                list.map((item) =>
+                    setPStats((prev) => [
+                        ...prev,
+                        { name: MONTHS[item._id - 1], Sales: item.total },
+                    ])
+                );
+            } catch (err) {
+                console.log(err);
             }
-        }
+        };
         getStats();
-    },[productId, MONTHS ])
+    }, [productId, MONTHS]);
+
+    const [formData, setFormData] = useState({
+        title: "",
+        desc: "",
+        price: "",
+        inStock: false,
+        active: "yes"
+    });
+
+    useEffect(() => {
+        if (product) {
+            setFormData({
+                title: product.title,
+                desc: product.desc,
+                price: product.price,
+                inStock: product.inStock,
+                active: product.active
+            });
+        }
+    }, [product]);
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        const newValue = type === "checkbox" ? checked : value;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: newValue
+        }));
+    };
 
     return (
         <div className="product">
@@ -67,15 +95,15 @@ export default function Product() {
                 <div className="productTopRight">
                     <div className="productInfoTop">
                         <img
-                            src={product.img}
-                            alt={product.title} // Added alt attribute
+                            src={product?.img}
+                            alt={product?.title}
                         />
-                        <span className="productName">{product.title}</span>
+                        <span className="productName">{product?.title}</span>
                     </div>
                     <div className="productInfoBottom">
                         <div className="productInfoItem">
                             <span className="productInfoKey">id:</span>
-                            <span className="productInfoValue">{product._id}</span>
+                            <span className="productInfoValue">{product?._id}</span>
                         </div>
                         <div className="productInfoItem">
                             <span className="productInfoKey">sales:</span>
@@ -83,7 +111,7 @@ export default function Product() {
                         </div>
                         <div className="productInfoItem">
                             <span className="productInfoKey">in stock:</span>
-                            <span className="productInfoValue">{product.inStock}</span>
+                            <span className="productInfoValue">{product?.inStock}</span>
                         </div>
                     </div>
                 </div>
@@ -92,25 +120,25 @@ export default function Product() {
                 <form className="productForm">
                     <div className="productFormLeft">
                         <label>Product Name</label>
-                        <input type="text" placeholder={product.title} />
+                        <input type="text" name="title" value={formData.title} onChange={handleChange} />
                         <label>Product description</label>
-                        <input type="text" placeholder={product.desc} />
+                        <input type="text" name="desc" value={formData.desc} onChange={handleChange} />
                         <label>Price</label>
-                        <input type="text" placeholder={product.price} />
+                        <input type="text" name="price" value={formData.price} onChange={handleChange} />
                         <label>In Stock</label>
-                        <select name="inStock" id="inStock">
+                        <select name="inStock" value={formData.inStock} onChange={handleChange}>
                             <option value={true}>Yes</option>
                             <option value={false}>No</option>
                         </select>
                         <label>Active</label>
-                        <select name="active" id="active">
+                        <select name="active" value={formData.active} onChange={handleChange}>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
                         </select>
                     </div>
                     <div className="productFormRight">
                         <div className="productUpload">
-                            <img src={product.img} alt={product.title} />
+                            <img src={product?.img} alt={product?.title} />
                             <label htmlFor="file">
                                 <PublishIcon />
                             </label>
