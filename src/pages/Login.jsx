@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { loginStart } from '../redux/userRedux'; // Assuming you have a login action creator in userRedux.js
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100vw;
@@ -122,8 +122,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)} // Update password state on change
           />
           <Button onClick={handleClick}>LOGIN</Button> {/* Call handleClick on button click */}
-          <Link>Forgot Password?</Link>
-          <Link>CREATE NEW ACCOUNT</Link>
+          {error && <Error>{error}</Error>} {/* Display error message if there's an error */}
+          <Link href="#">Forgot Password?</Link>
+          <Link href="#" onClick={() => navigate('/register')}>CREATE NEW ACCOUNT</Link>
         </Form>
       </Wrapper>
     </Container>

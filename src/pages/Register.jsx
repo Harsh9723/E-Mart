@@ -106,9 +106,9 @@ const Register = () => {
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <br />
-            <A>Privacy Policy</A>
+            <A onClick={() => navigate('/privacy')}>Privacy Policy</A>
           </Agreement>
-          <Button onClick={() => navigate('/')}>CREATE</Button>
+          <Button >CREATE</Button>
         </Form>
       </Wrapper>
     </Container>
