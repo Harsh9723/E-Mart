@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import  Product  from './Product'
-import { popularProducts } from '../data'
 import axios from 'axios'
 
 const Container = styled.div`
@@ -21,7 +20,7 @@ const Container = styled.div`
             try {
                 const res = await axios.get(
                     cat
-                        ? `http://localhost:5000/api/products?category=${cat}`
+                        ? `http://localhost:5000/api/products?categories=${cat}`
                         : "http:/localhost:5000/api/products"
                 );
                 setProducts(res.data)
@@ -61,7 +60,7 @@ const Container = styled.div`
     <Container>
         {
             cat
-            ? popularProducts.map((item) => <Product item={item} key={item.id} />)
+            ? filteredproducts.map((item) => <Product item={item} key={item.id} />)
             : products 
             .slice(0,8)
             .map((item) => <Product item = {item} key={item.id} />)

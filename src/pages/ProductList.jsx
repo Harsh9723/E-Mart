@@ -44,14 +44,14 @@ const ProductList = () => {
   const cat = location.pathname.split('/')[2]; // Extracting category from pathname
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState('Newest');
-
   const handleFilters = (e) => {
-    const value = e.target.value;
+    const { name, value } = e.target;
     setFilters({
       ...filters,
-      [e.target.name]: value,
+      [name]: value,
     });
   };
+
 
   return (
     <Container>
