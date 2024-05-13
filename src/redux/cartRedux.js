@@ -37,36 +37,11 @@ const cartSlice = createSlice({
         state.total -= productToRemove.price * productToRemove.quantity;
       }
     },
+    updateTotal: (state, action) => {
+      state.total = action.payload;
+    },
   },
 });
 
-// cartRedux.js
-
-const initialState = {
-    // other initial states
-    total: 0,
-  };
-  
-  const cartReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case 'REMOVE_PRODUCT':
-        // your existing logic
-      case 'UPDATE_TOTAL':
-        return {
-          ...state,
-          total: action.payload,
-        };
-      default:
-        return state;
-    }
-  };
-  
-  
-  
-export const updateTotal = (total) => ({
-    type: 'UPDATE_TOTAL',
-    payload: total,
-  });
-
-export const { addProduct, removeProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, updateTotal } = cartSlice.actions;
 export default cartSlice.reducer;

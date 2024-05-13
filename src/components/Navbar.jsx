@@ -82,10 +82,7 @@ function Navbar() {
 
     const handleLanguageChange = (e) => {
         setLanguage(e.target.value);
-        // Logic to change language goes here
     };
-    
-
     return (
         <Container>
             <Wrapper>
