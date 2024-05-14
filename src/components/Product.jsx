@@ -14,7 +14,7 @@ const Info = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 3;
   display: flex;
   align-items: center;
@@ -26,7 +26,8 @@ const Info = styled.div`
 `
 
 const Container = styled.div`
- flex: 1;
+  
+  flex: 1;
   margin: 5px;
   min-width: 280px;
   height: 350px;
@@ -37,7 +38,6 @@ const Container = styled.div`
   border: 2px solid #F0EBE3;
   border-radius: 20px;
   position: relative;
-
 
   &:hover ${Info}{
     opacity: 1;
@@ -57,12 +57,25 @@ const Icon = styled.div`
   align-items: center;
   justify-content: center;
   margin: 10px;
+  margin-top: 40px;
   transition: all 0.5s ease;
   &:hover {
     background-color: #e9f5f5;
     transform: scale(1.1);
   }
 `
+
+const Price = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-size: 2rem;
+`;
+
 
 
 
@@ -74,17 +87,17 @@ const Product = ({ item }) => {
       {/* <Circle /> */}
       <Image src={item.img} />
       <Info>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
+        <Price>
+        ₹{item.price}
+        </Price>
         <Icon>
           <Link to={`/product/${item._id}`}>
-              <SearchOutlined />
+              <ShoppingCartOutlined />
           </Link>
         </Icon>
-        <Icon>
+        {/* <Icon>
             <FavoriteBorderOutlined/>
-        </Icon>
+        </Icon> */}
         
       </Info>
     </Container>

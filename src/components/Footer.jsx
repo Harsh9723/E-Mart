@@ -24,8 +24,13 @@ import { useNavigate } from "react-router";
     padding: 20px;
   `;
   
-  const Logo = styled.h1``;
-  
+  const Logo = styled.h1`
+  font-weight: bold;
+  ${mobile({ fontSize: "24px" })}
+  font-family: "Slackside One", cursive;
+  font-weight: 400;
+  font-style: normal;
+  `
   const Desc = styled.p`
     margin: 20px 0px;
   `;
@@ -93,7 +98,7 @@ import { useNavigate } from "react-router";
     return (
       <Container>
         <Left>
-          <Logo>E-Mart</Logo>
+          <Logo>Signature Style</Logo>
           <Desc>
             There are many variations of passages of Lorem Ipsum available, but
             the majority have suffered alteration in some form, by injected

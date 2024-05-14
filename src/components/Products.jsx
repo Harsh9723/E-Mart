@@ -56,6 +56,8 @@ const Container = styled.div`
     }
     },[sort])
 
+    console.log(products);
+
   return (
     <Container>
         {

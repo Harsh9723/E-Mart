@@ -80,18 +80,17 @@ function Navbar() {
     const quantity = useSelector(state => state.cart.quantity);
     const [language, setLanguage] = useState('en');
 
-    const handleLanguageChange = (e) => {
-        setLanguage(e.target.value);
-    };
+    // const handleLanguageChange = (e) => {
+    //     setLanguage(e.target.value);
+    // };
     return (
         <Container>
             <Wrapper>
                 <Left>
-                    <LanguageDropdown value={language} onChange={handleLanguageChange}>
+                    {/* <LanguageDropdown value={language} onChange={handleLanguageChange}>
                         <option value="en">EN</option>
                         <option value="fr">FR</option>
-                        {/* Add more options for other languages */}
-                    </LanguageDropdown>
+                    </LanguageDropdown> */}
                     <SearchContainer>
                         <Input placeholder="Search" />
                         <Search style={{ color: "gray", fontSize: 16 }} />
