@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Category1 from './pages/Categories/Category1';
 
 function App() {
 
@@ -34,6 +35,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/success" element={<Success />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/Categories" element={<Category1 />} />
+
 
 
         {/* Login and register routes */}

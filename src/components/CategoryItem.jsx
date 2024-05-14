@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { mobile } from '../responsive';
+import { useNavigate } from 'react-router';
 
 const Container = styled.div`
   width: 100%;
@@ -62,12 +63,13 @@ const Button = styled.button`
 `;
 
 const CategoryItem = ({ item }) => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Image src={item.img} />
       <Info>
         <Title>{item.title}</Title>
-        <Button>Shop Now</Button>
+        <Button onClick={() => navigate('Categories')}>Shop Now</Button>
       </Info>
     </Container>
   );
