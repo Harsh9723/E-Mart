@@ -1,27 +1,20 @@
-import React from 'react';
-import styled from 'styled-components';
-import { mobile } from '../responsive';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
-  width: 100%;
+  flex: 1;
   margin: 3px;
   height: 70vh;
   position: relative;
-
-  ${mobile({
-    height: "auto",
-    marginBottom: "20px" // Adjusted margin for mobile
-  })}
 `;
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  ${mobile({ height: "20vh" })}
 
-  ${mobile({
-    height: "100%"
-  })}
 `;
 
 const Info = styled.div`
@@ -36,39 +29,30 @@ const Info = styled.div`
   justify-content: center;
 `;
 
-const Title = styled.div`
-  color: white;
-  margin-bottom: 20px;
-  font-size: 24px; // Adjusted font size for mobile
-
-  ${mobile({
-    fontSize: "20px"
-  })}
+const Title = styled.h1`
+    color:white;
+    margin-bottom: 20px;
 `;
 
 const Button = styled.button`
-  border: none;
-  padding: 10px;
-  background-color: white;
-  color: gray;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 16px; // Adjusted font size for mobile
-
-  ${mobile({
-    fontSize: "14px",
-    padding: "8px 16px" // Adjusted padding for mobile
-  })}
+    border:none;
+    padding: 10px;
+    background-color: white;
+    color:gray;
+    cursor: pointer;
+    font-weight: 600;
 `;
 
 const CategoryItem = ({ item }) => {
   return (
     <Container>
+      <Link to={`/products/${item.cat}`}>
       <Image src={item.img} />
       <Info>
         <Title>{item.title}</Title>
-        <Button>Shop Now</Button>
+        <Button>SHOP NOW</Button>
       </Info>
+      </Link>
     </Container>
   );
 };

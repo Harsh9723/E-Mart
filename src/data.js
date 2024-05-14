@@ -27,16 +27,19 @@ export const sliderItems = [
       id: 1,
       img: "https://assets.myntassets.com/fl_progressive/h_960,q_80,w_720/v1/assets/images/2164373/2017/11/15/11510749192975-Roadster-Men-Brown--Black-Regular-Fit-Checked-Casual-Shirt-8071510749192783-1.jpg",
       title: "SHIRT STYLE!",
+      cat: "men"
     },
     {
       id: 2,
       img: "https://cdn.luxe.digital/media/2020/03/18150853/men-loungewear-style-modern-luxury-luxe-digital.jpg",
       title: "LOUNGEWEAR LOVE",
+      cat: "women"
     },
     {
       id: 3,
       img: "https://images.opumo.com/wordpress/wp-content/uploads/2023/05/Wax15-970x1200.jpg",
       title: "LIGHT JACKETS",
+      cat: "kids"
     },
   ];
 
