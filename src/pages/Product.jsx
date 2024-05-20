@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Add, Remove } from "@material-ui/icons";
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 import { publicRequest } from '../requestMethods';
 import { addProduct } from "../redux/cartRedux";
 import { mobile } from "../responsive";
+
 
 const Container = styled.div``;
 
@@ -66,7 +67,6 @@ const FilterTitle = styled.span`
   font-size: 20px;
   font-weight: 200;
 `;
-
 const FilterColor = styled.div`
   width: 20px;
   height: 20px;
@@ -74,6 +74,11 @@ const FilterColor = styled.div`
   background-color: ${(props) => props.color};
   margin: 0px 5px;
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+  }
 `;
 
 const FilterSize = styled.select`
@@ -129,11 +134,14 @@ const Product = () => {
   const [size, setSize] = useState("");
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   useEffect(() => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
+        // Scroll to the top of the page
+        window.scrollTo(0, 0);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -152,6 +160,7 @@ const Product = () => {
 
   const handleClick = () => {
     dispatch(addProduct({...product, quantity, color, size}));
+    navigate('/cart')
   };
 
   return (

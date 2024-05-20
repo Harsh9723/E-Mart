@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import { mobile } from '../responsive';
 
 const Container = styled.div`
@@ -40,10 +41,20 @@ const Paragraph = styled.p`
   margin-bottom: 10px;
 `;
 
+const BackButton = styled(Link)` // Styled Link for back button
+  position: absolute;
+  top:50px;
+  left: 100px;
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+`;
+
 const PrivacyPolicy = () => {
   return (
     <Container>
       <Wrapper>
+        <BackButton to="/register">Back</BackButton>
         <Title>Privacy Policy</Title>
         <Paragraph>
           Your privacy is important to us. It is our policy to respect your privacy regarding any information we may collect from you across our website.

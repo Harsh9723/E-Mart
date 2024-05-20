@@ -93,15 +93,37 @@ const Error = styled.span`
 `;
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    dispatch(loginStart(username, password)); // Dispatch the login action with username and password
+    try {
+      // Make an API request to authenticate the user
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // Dispatch the login action with user data
+        dispatch(loginStart(data));
+        // Redirect to the dashboard or any other page after successful login
+        navigate('/');
+      } else {
+        // Handle authentication error
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+    } catch (error) {
+      console.error('Login failed:', error.message);
+    }
   };
 
   return (
@@ -110,10 +132,10 @@ const Login = () => {
         <Title>SIGN IN</Title>
         <Form>
           <Input 
-            type="text" 
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)} // Update username state on change
+            type="email" 
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} // Update email state on change
           />
           <Input 
             type="password" 

@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
+import { useNavigate } from "react-router";
+
 
 const Container = styled.div`
   width: 100%;
@@ -97,6 +99,7 @@ const Slider = () => {
     }
   };
 
+  const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
       handleClick("right");
@@ -119,7 +122,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOP NOW</Button>
+              <Button onClick={() => navigate("/products/men")}>SHOP NOW</Button>
             </InfoContainer>
           </Slide>
         ))}

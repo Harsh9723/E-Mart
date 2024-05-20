@@ -1,4 +1,4 @@
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove,Delete } from "@material-ui/icons";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -9,15 +9,17 @@ import { useEffect, useState } from "react";
 import { useRequest } from "../requestMethods";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { removeProduct} from "../redux/cartRedux";
-import { updateTotal } from "../redux/cartRedux";
+import { removeProduct as setRemoveProduct } from "../redux/cartRedux";
+import { updateTotal as setUpdateTotal } from "../redux/cartRedux";
+import { updateQuantity as setUpdateQuantity } from "../redux/cartRedux";
+
 const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 20px;
-  ₹{mobile({ padding: "10px" })}
+  ${mobile({ padding: "10px" })}
 `;
 
 const Title = styled.h1`
@@ -36,14 +38,14 @@ const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
   cursor: pointer;
-  border: ₹{(props) => props.type === "filled" && "none"};
-  background-color: ₹{(props) =>
+  border: ${(props) => props.type === "filled" && "none"};
+  background-color: ${(props) =>
     props.type === "filled" ? "black" : "transparent"};
-  color: ₹{(props) => props.type === "filled" && "white"};
+  color: ${(props) => props.type === "filled" && "white"};
 `;
 
 const TopTexts = styled.div`
-  ₹{mobile({ display: "none" })}
+  ${mobile({ display: "none" })}
 `;
 const TopText = styled.span`
   text-decoration: underline;
@@ -54,7 +56,7 @@ const TopText = styled.span`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
-  ₹{mobile({ flexDirection: "column" })}
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
@@ -64,7 +66,7 @@ const Info = styled.div`
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
-  ₹{mobile({ flexDirection: "column" })}
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -91,7 +93,7 @@ const ProductColor = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: ₹{(props) => props.color};
+  background-color: ${(props) => props.color};
 `;
 
 const ProductSize = styled.span``;
@@ -113,13 +115,13 @@ const ProductAmountContainer = styled.div`
 const ProductAmount = styled.div`
   font-size: 24px;
   margin: 5px;
-  ₹{mobile({ margin: "5px 15px" })}
+  ${mobile({ margin: "5px 15px" })}
 `;
 
 const ProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
-  ₹{mobile({ marginBottom: "20px" })}
+  ${mobile({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`
@@ -144,8 +146,8 @@ const SummaryItem = styled.div`
   margin: 30px 0px;
   display: flex;
   justify-content: space-between;
-  font-weight: ₹{(props) => props.type === "total" && "500"};
-  font-size: ₹{(props) => props.type === "total" && "24px"};
+  font-weight: ${(props) => props.type === "total" && "500"};
+  font-size: ${(props) => props.type === "total" && "24px"};
 `;
 
 const SummaryItemText = styled.span``;
@@ -171,7 +173,19 @@ const Cart = () => {
   };
 
   const handleRemoveFromCart = (productId) => {
-    dispatch(removeProduct(productId));
+    dispatch(setRemoveProduct(productId));
+  };
+
+  const handleAddQuantity = (productId) => {
+    const product = cart.products.find((product) => product._id === productId);
+    const newQuantity = (product.quantity || 0) + 1;
+    dispatch(setUpdateQuantity(productId, newQuantity)); // Fixed variable name
+  };
+
+  const handleRemoveQuantity = (productId) => {
+    const product = cart.products.find((product) => product._id === productId);
+    const newQuantity = Math.max((product.quantity || 0) - 1, 0);
+    dispatch(setUpdateQuantity(productId, newQuantity)); // Fixed variable name
   };
 
   // Calculate total whenever cart changes
@@ -181,7 +195,7 @@ const Cart = () => {
       cart.products.forEach((product) => {
         total += product.price * product.quantity;
       });
-      dispatch(updateTotal(total)); // Dispatch an action to update total in Redux store
+      dispatch(setUpdateTotal(total)); // Dispatch an action to update total in Redux store
     };
 
     calculateTotal();
@@ -243,16 +257,18 @@ const Cart = () => {
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove
-                      onClick={() => handleRemoveFromCart(product._id)}
-                    />
-                  </ProductAmountContainer>
+                <ProductAmountContainer>
+              <Add onClick={() => handleAddQuantity(product._id)} />
+              <ProductAmount>{product.quantity || 0}</ProductAmount>
+              <Remove onClick={() => handleRemoveQuantity(product._id)} />
+            </ProductAmountContainer>
                   <ProductPrice>
                     ₹ {product.price * product.quantity}
                   </ProductPrice>
+                <Delete 
+                  onClick={() => handleRemoveFromCart(product._id)}
+                  style={{ cursor: 'pointer', color: 'red', marginTop: '10px' }}
+                />
                 </PriceDetail>
               </Product>
             ))}
@@ -277,8 +293,8 @@ const Cart = () => {
               <SummaryItemPrice>₹{cart.total}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
-              name="E-Mart Shop"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              name="Signature Style Shop"
+              image="https://www.zarla.com/images/zarla-s-1x1-2400x2400-20211126-fg64yyfhbr3mt3699xg9.png?crop=1:1,smart&width=250&dpr=2"
               billingAddress
               shippingAddress
               description={`your total is ₹₹{cart.total}`}

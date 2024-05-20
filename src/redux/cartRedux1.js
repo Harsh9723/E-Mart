@@ -4,7 +4,6 @@
 const ADD_PRODUCT = 'ADD_PRODUCT';
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 const UPDATE_QUANTITY = 'UPDATE_QUANTITY';
-const UPDATE_TOTAL = 'UPDATE_TOTAL';
 
 // Action creators
 export const addProduct = (product) => ({
@@ -22,11 +21,6 @@ export const updateQuantity = (productId, quantity) => ({
   payload: { productId, quantity },
 });
 
-export const updateTotal = (total) => ({   // Export the updateTotal function
-  type: UPDATE_TOTAL,
-  payload: total,
-});
-
 // Reducer
 const initialState = {
   products: [],
@@ -38,7 +32,7 @@ const cartReducer = (state = initialState, action) => {
     case ADD_PRODUCT:
       return {
         ...state,
-        products: [...state.products, { ...action.payload, quantity: 1 }],
+        products: [...state.products, action.payload],
       };
     case REMOVE_PRODUCT:
       return {
@@ -53,11 +47,6 @@ const cartReducer = (state = initialState, action) => {
             ? { ...product, quantity: action.payload.quantity }
             : product
         ),
-      };
-    case UPDATE_TOTAL:
-      return {
-        ...state,
-        total: action.payload,
       };
     default:
       return state;

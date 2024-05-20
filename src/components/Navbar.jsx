@@ -40,7 +40,7 @@ const SearchContainer = styled.div`
 `;
 
 const Input = styled.input`
-    border: none;
+    
     ${mobile({ width: "50px" })}
 `;
 
@@ -50,9 +50,13 @@ const Center = styled.div`
 `;
 
 const Logo = styled.h1`
-    font-weight: bold;
-    ${mobile({ fontSize: "24px" })}
-`;
+font-weight: bold;
+${mobile({ fontSize: "24px" })}
+font-family: "Slackside One", cursive;
+font-weight: 400;
+font-style: normal;
+margin-left: 5px;
+`
 
 const Right = styled.div`
     flex: 1;
@@ -91,13 +95,13 @@ function Navbar() {
                         <option value="en">EN</option>
                         <option value="fr">FR</option>
                     </LanguageDropdown> */}
-                    <SearchContainer>
+                    {/* <SearchContainer>
                         <Input placeholder="Search" />
                         <Search style={{ color: "gray", fontSize: 16 }} />
-                    </SearchContainer>
+                    </SearchContainer> */}
+                <Logo>Signature Style</Logo>
                 </Left>
                 <Center>
-                    <Logo>E-Mart</Logo>
                 </Center>
                 <Right>
                     <MenuItem onClick={() => navigate('/register')}>REGISTER</MenuItem>

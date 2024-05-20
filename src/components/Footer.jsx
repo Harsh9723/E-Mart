@@ -136,7 +136,7 @@ import {
             <Room style={{marginRight:"10px"}}/>Ahmedabad
           </ContactItem>
           <ContactItem>
-            <Phone style={{marginRight:"10px"}}/> 8956231478
+            <Phone style={{marginRight:"10px"}}/> 6353379230
           </ContactItem>
           <ContactItem>
             <MailOutline style={{marginRight:"10px"}} /> contact@e-mart.com

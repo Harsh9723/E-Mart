@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import axios from "axios"; // Import axios for making HTTP requests
 
 const Container = styled.div`
   width: 100vw;
@@ -19,7 +20,7 @@ const Container = styled.div`
 
   ${mobile({
     padding: "20px",
-    flexDirection: "column"
+    flexDirection: "column",
   })}
 `;
 
@@ -31,7 +32,7 @@ const Wrapper = styled.div`
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 
   ${mobile({
-    width: "80%"
+    width: "80%",
   })}
 `;
 
@@ -86,29 +87,91 @@ const Button = styled.button`
   }
 
   ${mobile({
-    width: "100%"
+    width: "100%",
   })}
 `;
 
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Send a POST request to the API endpoint with the user data
+      await axios.post("http://localhost:5000/api/register", formData);
+      // Redirect to another page after successful registration
+      navigate("/login");
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
+    console.log(formData);
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>Create an account</Title>
-        <Form>
-          <Input type="text" placeholder="Name" />
-          <Input type="text" placeholder="Last Name" />
-          <Input type="text" placeholder="Username" />
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
-          <Input type="password" placeholder="Confirm Password" />
+        <Form >
+          <Input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          <Input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={formData.lastName}
+            onChange={handleChange}
+          />
+          <Input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleChange}
+          />
+          <Input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <Input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+          />
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <br />
-            <A onClick={() => navigate('/privacy')}>Privacy Policy</A>
+            <A onClick={() => navigate("/privacy")}>Privacy Policy</A>
           </Agreement>
-          <Button >CREATE</Button>
+          <Button onClick={handleSubmit}>CREATE</Button>
         </Form>
       </Wrapper>
     </Container>
